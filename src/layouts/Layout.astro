@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -138,26 +140,34 @@ const { title, description = "Servicios jurídicos profesionales del Lic. Alvaro
 </script>
 
 <style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
   :root {
     --accent: 124, 58, 237;
     --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
   }
-  html {
-    font-family: 'Source Sans Pro', system-ui, sans-serif;
-    scroll-behavior: smooth;
+
+  @layer base {
+    html {
+      font-family: 'Source Sans Pro', system-ui, sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      padding-top: 5rem;
+    }
   }
-  body {
-    margin: 0;
-    padding-top: 5rem;
-  }
-  .font-serif {
-    font-family: 'Playfair Display', serif;
-  }
-  
-  /* Animaciones del menú móvil */
-  #mobileMenu {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+  @layer components {
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+    #mobileMenu {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
   }
 </style>
