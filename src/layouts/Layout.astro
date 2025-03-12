@@ -1,22 +1,163 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Servicios jurídicos profesionales del Lic. Alvaro Calderon Sagastume" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="images/licpic.jpg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header class="fixed top-0 left-0 right-0 w-full bg-white shadow-md z-50">
+      <nav class="container mx-auto px-6 py-4 relative">
+
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-2xl font-serif font-bold text-gray-800">Lic. Calderon Sagastume</a>
+          
+          <!-- Botón de menú móvil -->
+          <button id="menuButton" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none transition-all duration-300" aria-label="Menú">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" class="transition-transform duration-300"/>
+            </svg>
+          </button>
+
+          <!-- Menú de escritorio -->
+          <div class="hidden md:flex space-x-8">
+            <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Inicio</a>
+            <a href="/servicios" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Servicios</a>
+            <a href="/sobre-mi" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Sobre Mí</a>
+            <a href="/contacto" class="text-gray-600 hover:text-gray-900 transition-colors duration-300">Contacto</a>
+          </div>
+        </div>
+
+        <!-- Menú móvil -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+          <div class="flex flex-col space-y-4 py-4 px-6 border-t border-gray-200">
+            <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:pl-2">Inicio</a>
+            <a href="/servicios" class="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:pl-2">Servicios</a>
+            <a href="/sobre-mi" class="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:pl-2">Sobre Mí</a>
+            <a href="/contacto" class="text-gray-600 hover:text-gray-900 transition-colors duration-300 hover:pl-2">Contacto</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-gray-900 text-white mt-20">
+      <div class="container mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contacto</h3>
+            <p>Email: info@calderonsagastume.com</p>
+            <p>Tel: +502 XXXX-XXXX</p>
+            <p>Dirección: Ciudad de Guatemala</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Horario</h3>
+            <p>Lunes a Viernes</p>
+            <p>8:00 AM - 5:00 PM</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Síguenos</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="hover:text-gray-300 transition-colors duration-300">LinkedIn</a>
+              <a href="#" class="hover:text-gray-300 transition-colors duration-300">Twitter</a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p>&copy; {new Date().getFullYear()} Lic. Alvaro Calderon Sagastume. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let isMenuOpen = false;
+
+  menuButton?.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    if (mobileMenu) {
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          mobileMenu.style.opacity = '1';
+          mobileMenu.style.transform = 'translateY(0)';
+        });
+      } else {
+        mobileMenu.style.opacity = '0';
+        mobileMenu.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+        }, 300);
+      }
+    }
+    
+    // Animar el ícono del menú
+    const icon = menuButton.querySelector('svg');
+    if (icon) {
+      icon.style.transform = isMenuOpen ? 'rotate(180deg)' : '';
+    }
+  });
+
+  // Cerrar el menú al hacer clic en un enlace
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      isMenuOpen = false;
+      if (mobileMenu) {
+        mobileMenu.style.opacity = '0';
+        mobileMenu.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+        }, 300);
+      }
+      const icon = menuButton?.querySelector('svg');
+      if (icon) {
+        icon.style.transform = '';
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+  }
+  html {
+    font-family: 'Source Sans Pro', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    padding-top: 5rem;
+  }
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  /* Animaciones del menú móvil */
+  #mobileMenu {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
 </style>

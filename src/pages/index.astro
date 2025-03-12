@@ -1,11 +1,80 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Lic. Alvaro Calderon Sagastume - Servicios Jurídicos">
+  <!-- Hero Section -->
+  <section class="relative h-[90vh] flex items-center">
+    <div class="absolute inset-0 bg-[url('/images/ofi.jpg')] bg-cover bg-center">
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    <div class="container mx-auto px-6 relative text-white">
+      <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">
+        Lic. Alvaro Calderon Sagastume
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-2xl">
+        Comprometidos con la excelencia legal y la defensa de sus derechos
+      </p>
+      <a href="/contacto" class="bg-white text-gray-900 px-8 py-3 rounded-md hover:bg-gray-100 transition duration-300">
+        Consulta Gratuita
+      </a>
+    </div>
+  </section>
+
+  <!-- Servicios Destacados -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Áreas de Práctica</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-4">Derecho Civil</h3>
+          <p class="text-gray-600">Asesoramiento en contratos, responsabilidad civil, derecho inmobiliario y derecho de familia.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-4">Derecho Mercantil</h3>
+          <p class="text-gray-600">Constitución de sociedades, contratos mercantiles y asesoría empresarial integral.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-4">Derecho Laboral</h3>
+          <p class="text-gray-600">Representación en conflictos laborales, negociación de contratos y asesoría en normativa laboral.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por qué Elegirnos -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">¿Por qué Elegirnos?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl font-bold text-gray-800 mb-4">27+</div>
+          <p class="text-gray-600">Años de Experiencia</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-gray-800 mb-4">500+</div>
+          <p class="text-gray-600">Casos Exitosos</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-gray-800 mb-4">100%</div>
+          <p class="text-gray-600">Compromiso</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-gray-800 mb-4">24/7</div>
+          <p class="text-gray-600">Disponibilidad</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto CTA -->
+  <section class="bg-gray-900 text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-serif font-bold mb-4">¿Necesita Asesoría Legal?</h2>
+      <p class="mb-8 text-xl">Contáctenos hoy para una consulta inicial gratuita</p>
+      <a href="/contacto" class="inline-block bg-white text-gray-900 px-8 py-3 rounded-md hover:bg-gray-100 transition duration-300">
+        Agendar Consulta
+      </a>
+    </div>
+  </section>
 </Layout>
